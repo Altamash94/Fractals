@@ -95,6 +95,6 @@ int main() {
     bitmap.DrawFractal(zoomList.m_transform);
     bitmap.DrawCircle(center, radius, color, Mat<double>(3, 3));
     bitmap.write("test.bmp");
-	drawFractal(bitmap, zooms);
+	//drawFractal(bitmap, zooms);
 
 }
