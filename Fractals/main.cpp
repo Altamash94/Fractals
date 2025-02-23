@@ -45,14 +45,15 @@ void drawFractal(Bitmap<Color32>& bitmap, vector<Zoom> zooms) {
 
 int main() {
     
-    
-    
     const int WIDTH = 600, HEIGHT = 480;
+    Bitmap<Color32> bitmap(WIDTH, HEIGHT);
+
+	//Draw fractal
     ZoomList zoomList(WIDTH, HEIGHT);
 	std::vector<Zoom> zooms;
     zooms.push_back(Zoom(Vec2<int>(840, 0), 2.4));
     zooms.push_back(Zoom(Vec2<int>(300, 0), 4.0));
-    zooms.push_back(Zoom(Vec2<int>(-200, 0), 2.0));
+    /*zooms.push_back(Zoom(Vec2<int>(-200, 0), 2.0));
     zooms.push_back(Zoom(Vec2<int>(154, 227), 2.0));
     zooms.push_back(Zoom(Vec2<int>(9, 24), 4.0));
     zooms.push_back(Zoom(Vec2<int>(0, 0), 2.0));
@@ -78,23 +79,26 @@ int main() {
     zooms.push_back(Zoom(Vec2<int>(0, 0), 4.0));
     zooms.push_back(Zoom(Vec2<int>(0, 0), 4.0));
     zooms.push_back(Zoom(Vec2<int>(100, 0), 4.0));
-    zooms.push_back(Zoom(Vec2<int>(0, 0), 4.0));
-
+    zooms.push_back(Zoom(Vec2<int>(0, 0), 4.0));*/
     for (Zoom zoom: zooms) {
 		zoomList.add(zoom);
     }
 	zoomList.apply();
-	cout << "Zooms:\n" << zoomList.m_transform << endl;
+    bitmap.DrawFractal(zoomList.m_transform);
 
-
+	//Draw a circle
     Color32 color(255, 0, 0, 127);
     Vec2<int> center(WIDTH / 2, HEIGHT / 2);
     int radius = 10;
-    Bitmap<Color32> bitmap(WIDTH, HEIGHT);
-
-    bitmap.DrawFractal(zoomList.m_transform);
     bitmap.DrawCircle(center, radius, color, Mat<double>(3, 3));
+    
+    //save the output
     bitmap.write("test.bmp");
+
+	/*
+    For drawing intermediate fractal from zooms vector
+	Graphics drawn with processor rather than GPU. So, it will take time to draw.
+    */
 	//drawFractal(bitmap, zooms);
 
 }
